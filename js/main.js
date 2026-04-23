@@ -74,6 +74,8 @@ const TRANSLATIONS = {
 
     'brand.name':             'Casino del Hyatt Mendoza',
 
+    'hero.badge':             '🎰 FREE PLAY GRÁTIS',
+
     'hero.eyebrow':           'A 1 minuto de você',
     'hero.headline':          'Jogue no Casino del Hyatt Mendoza',
     'hero.subheadline':       'Nas nossas máquinas, carregue crédito com QR, Pix ou carteira digital',
@@ -105,7 +107,7 @@ const TRANSLATIONS = {
     'form.success':           '✓ Recebemos seu contato! Falaremos em instantes.',
 
     'footer.legal':           'Casino del Hyatt Mendoza · Jogo responsável · +18',
-    'footer.address':         'Primitivo de la Reta 1124, Mendoza, Argentina',
+    'footer.address':         '25 de mayo 1115, Mendoza, Argentina',
   },
 
   /* ─── INGLÉS ─── */
@@ -115,11 +117,13 @@ const TRANSLATIONS = {
 
     'brand.name':             'Casino del Hyatt Mendoza',
 
+    'hero.badge':             '🎰 FREE PLAY NOW',
+
     'hero.eyebrow':           '1 minute from you',
     'hero.headline':          'Play at Casino del Hyatt Mendoza',
     'hero.subheadline':       'At our machines, load credits with QR, Pix or digital wallet',
-    'hero.cta':               'GET FREE CREDIT',
-    'hero.cta.ariaLabel':     'Get free credit via WhatsApp',
+    'hero.cta':               'CLAIM YOUR CREDIT',
+    'hero.cta.ariaLabel':     'Claim your free credit via WhatsApp',
     'hero.trust':             '✓ QR Code · ✓ Pix · ✓ Digital wallet',
     'hero.whatsappUrl':       'https://wa.me/5402610000000?text=I+want+my+free+credits',
 
@@ -133,20 +137,20 @@ const TRANSLATIONS = {
 
     'convert.title':          'Ready to play?',
     'convert.body':           'Chat with us now on WhatsApp and claim your free credit.',
-    'convert.cta':            'Chat on WhatsApp',
-    'convert.cta.ariaLabel':  'Open WhatsApp to chat with us',
-    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=I+want+my+free+credits',
+    'convert.cta':            'Claim on WhatsApp',
+    'convert.cta.ariaLabel':  'Claim your free credit via WhatsApp',
+    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=I+want+to+claim+my+free+credits',
     'convert.divider':        'or leave your contact',
 
     'form.name.label':        'Name',
     'form.name.placeholder':  'Your name',
     'form.phone.label':       'WhatsApp',
     'form.phone.placeholder': '+1 555 000-0000',
-    'form.submit':            'Claim my free credit',
+    'form.submit':            'Claim your credit',
     'form.success':           "✓ We got your info! We'll be in touch shortly.",
 
     'footer.legal':           'Casino del Hyatt Mendoza · Responsible gambling · +18',
-    'footer.address':         'Primitivo de la Reta 1124, Mendoza, Argentina',
+    'footer.address':         '25 de mayo 1115, Mendoza, Argentina',
   },
 
   /* ─── ESPAÑOL ─── */
@@ -156,13 +160,15 @@ const TRANSLATIONS = {
 
     'brand.name':             'Casino del Hyatt Mendoza',
 
+    'hero.badge':             '🎰 FREE PLAY GRATIS',
+
     'hero.eyebrow':           'A 1 minuto de donde estás',
     'hero.headline':          'Viví el Casino del Hyatt Mendoza',
     'hero.subheadline':       'En nuestras máquinas, cargá crédito con QR, Pix o billetera virtual',
-    'hero.cta':               'OBTENER CRÉDITO',
-    'hero.cta.ariaLabel':     'Obtener crédito gratis por WhatsApp',
+    'hero.cta':               'RECLAMÁ TUS CRÉDITOS',
+    'hero.cta.ariaLabel':     'Reclamá tus créditos gratis por WhatsApp',
     'hero.trust':             '✓ QR Code · ✓ Pix · ✓ Billetera virtual',
-    'hero.whatsappUrl':       'https://wa.me/5402610000000?text=Quiero+mi+crédito+gratis',
+    'hero.whatsappUrl':       'https://wa.me/5402610000000?text=Quiero+reclamar+mis+créditos+gratis',
 
     'how.title':              '¿Cómo funciona?',
     'how.step1.heading':      'Entrá al casino',
@@ -174,20 +180,20 @@ const TRANSLATIONS = {
 
     'convert.title':          '¿Listo para jugar?',
     'convert.body':           'Hablanos ahora por WhatsApp y reservá tu crédito gratis.',
-    'convert.cta':            'Hablar por WhatsApp',
-    'convert.cta.ariaLabel':  'Abrir WhatsApp para hablar con nosotros',
-    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=Quiero+mi+crédito+gratis',
+    'convert.cta':            'Reclamá por WhatsApp',
+    'convert.cta.ariaLabel':  'Reclamá tus créditos por WhatsApp',
+    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=Quiero+reclamar+mis+créditos+gratis',
     'convert.divider':        'o dejá tu contacto',
 
     'form.name.label':        'Nombre',
     'form.name.placeholder':  'Tu nombre',
     'form.phone.label':       'WhatsApp',
     'form.phone.placeholder': '+54 9 261 000-0000',
-    'form.submit':            'Quiero mi crédito',
+    'form.submit':            'Reclamá tus créditos',
     'form.success':           '✓ ¡Recibimos tu contacto! Te escribimos en instantes.',
 
     'footer.legal':           'Casino del Hyatt Mendoza · Juego responsable · +18',
-    'footer.address':         'Primitivo de la Reta 1124, Mendoza, Argentina',
+    'footer.address':         '25 de mayo 1115, Mendoza, Argentina',
   },
 };
 

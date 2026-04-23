@@ -44,6 +44,12 @@
     <link rel="preload" as="image" href="assets/hero-slots.jpg" />
     <link rel="preload" as="image" href="assets/casino-floor.jpg" />
 
+    <!-- ═══ FUENTES — Montserrat (headings) + Inter (body) ═══ -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&family=Inter:wght@400;500;600&display=swap" />
+
     <!-- ═══ ESTILOS ══════════════════════════════════════════════ -->
     <link rel="stylesheet" href="css/styles.css" />
 
@@ -55,7 +61,7 @@
       "name": "Casino del Hyatt Mendoza",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Primitivo de la Reta 1124",
+        "streetAddress": "25 de mayo 1115",
         "addressLocality": "Mendoza",
         "addressCountry": "AR"
       },
@@ -99,6 +105,12 @@
 
       <!-- Contenido principal -->
       <div class="hero__content">
+
+        <!-- Badge FREE PLAY — primer impacto visual -->
+        <div class="hero__badge" data-i18n="hero.badge" aria-label="Oferta especial">
+          🎰 FREE PLAY GRÁTIS
+        </div>
+
         <p class="hero__eyebrow" data-i18n="hero.eyebrow" aria-hidden="true">
           A 1 minuto de você
         </p>
@@ -292,6 +304,68 @@
 
 
     <!-- ═══════════════════════════════════════════════════════════
+         PRE-FOOTER — Leyendas legales IPJyC (obligatorio)
+         Contenido estático en español por requerimiento regulatorio
+    ═══════════════════════════════════════════════════════════════ -->
+    <aside class="prefooter" role="complementary" aria-label="Juego responsable e información legal">
+
+      <!-- Fila de badges regulatorios -->
+      <div class="prefooter__badges">
+
+        <!-- Juego Responsable -->
+        <div class="legal-badge legal-badge--responsible">
+          <div class="legal-badge__icon" aria-hidden="true">🤝</div>
+          <div class="legal-badge__body">
+            <strong class="legal-badge__title">JUEGO RESPONSABLE</strong>
+            <span class="legal-badge__sub">Programa de Prevención y Asistencia</span>
+            <span class="legal-badge__phones">
+              <span aria-label="Teléfono">📞</span>
+              <a href="tel:2614247536" class="legal-phone">261-424-7536</a>
+              ·
+              <a href="tel:2614722471" class="legal-phone">261-472-2471</a>
+            </span>
+          </div>
+        </div>
+
+        <!-- +18 -->
+        <div class="legal-badge legal-badge--age" aria-label="Solo mayores de 18 años">
+          <span class="age-circle" aria-hidden="true">+18</span>
+        </div>
+
+        <!-- Pre-autoexclusión -->
+        <div class="legal-badge legal-badge--exclusion">
+          <span class="exclusion-icon" aria-hidden="true">🚫</span>
+          <span class="exclusion-label">Pre<br/>autoexclusión</span>
+        </div>
+
+        <!-- IPJyC -->
+        <div class="legal-badge legal-badge--ipjyc" aria-label="Instituto Provincial de Juegos y Casinos, Mendoza Gobierno">
+          <span class="ipjyc-gov" aria-hidden="true">🏛️</span>
+          <div class="ipjyc-text">
+            <strong>MENDOZA</strong>
+            <span>Gobierno</span>
+            <em>IPJyC</em>
+          </div>
+        </div>
+
+      </div><!-- /prefooter__badges -->
+
+      <!-- Leyendas de advertencia -->
+      <div class="prefooter__warnings" role="note">
+        <p class="prefooter__warn">
+          <span aria-hidden="true">🔞</span>
+          Prohibido el ingreso a menores de 18 años
+        </p>
+        <p class="prefooter__warn prefooter__warn--health">
+          <span aria-hidden="true">⚠️</span>
+          Jugar compulsivamente es perjudicial para la salud.
+        </p>
+      </div>
+
+    </aside><!-- /prefooter -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════
          FOOTER
     ═══════════════════════════════════════════════════════════════ -->
     <footer class="site-footer" role="contentinfo">
@@ -299,7 +373,7 @@
         Casino del Hyatt Mendoza · Jogo responsável · +18
       </p>
       <p class="footer__address" data-i18n="footer.address">
-        Primitivo de la Reta 1124, Mendoza, Argentina
+        25 de mayo 1115, Mendoza, Argentina
       </p>
     </footer>
 
