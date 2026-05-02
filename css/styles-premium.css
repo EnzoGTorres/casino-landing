@@ -1,0 +1,1187 @@
+/* =============================================================
+   CASINO DEL HYATT MENDOZA — styles-premium.css
+   Tema: Las Vegas Luxury · Premium Marketing · Serio y elegante
+   =============================================================
+
+   Diferencias vs styles.css (candy/neon):
+   - Oro cálido como acento principal (no rosa)
+   - Overlays más opacos: fotos como textura, no protagonistas
+   - Sin gradiente animado en headline
+   - Botones dorados con texto oscuro (contraste máximo)
+   - Glow muy contenido — luz de escenario, no letrero de colores
+   - Cards con borde dorado fino en lugar de glass colorido
+   - Animaciones más lentas y casi imperceptibles
+   - Sensación: "Wynn · Bellagio · MGM Grand"
+
+   IMÁGENES REQUERIDAS en /assets/ :
+     hero-slots.jpg    → Máquinas con ambiente oscuro
+     casino-floor.jpg  → Piso del casino
+     poker-bar.jpg     → Mesa de poker con bar
+
+   ============================================================= */
+
+/* ── Google Fonts ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&family=Inter:wght@400;500;600&display=swap');
+
+
+/* ─────────────────────────────────────────────────────────────
+   1. DESIGN TOKENS — Paleta Premium
+   ───────────────────────────────────────────────────────────── */
+:root {
+  color-scheme: dark;
+
+  /* ── Base más profunda y cálida ─────────────────── */
+  --bg:       #06040e;
+  --bg-deep:  #030208;
+  --bg-mid:   #0e0a1c;
+
+  /* ── Oro — protagonista absoluto ───────────────── */
+  --gold:        #c9962a;   /* oro principal — cálido, serio  */
+  --gold-light:  #e8bb5a;   /* para texto en hover / highlight */
+  --gold-pale:   #f5dfa0;   /* para textos muy suaves          */
+  --gold-dark:   #6b4e10;   /* sombras y gradientes oscuros    */
+
+  /* ── Acento secundario — vino/bordo (ex-rosa) ─── */
+  --accent:      #9b1f52;   /* vino profundo — no grita        */
+  --accent-soft: rgba(155, 31, 82, 0.18);
+
+  /* ── Azul acero — sutil, para detalles fríos ─── */
+  --steel:       #1e5c82;
+  --steel-soft:  rgba(30, 92, 130, 0.18);
+
+  /* ── Verde WhatsApp — inalterado por ser marca ── */
+  --wapp:        #25d366;
+  --wapp-dark:   #128c7e;
+
+  /* ── Glow — contenido, como luz de escenario ─── */
+  --glow-gold:
+    0 0 16px rgba(201, 150, 42, 0.45),
+    0 0 40px rgba(201, 150, 42, 0.15);
+  --glow-accent:
+    0 0 14px rgba(155, 31, 82, 0.4),
+    0 0 35px rgba(155, 31, 82, 0.12);
+  --glow-green:
+    0 0 18px rgba(37, 211, 102, 0.45),
+    0 0 40px rgba(37, 211, 102, 0.15);
+
+  /* ── Glass — más oscuro, menos colorido ─────────── */
+  --glass:        rgba(6, 4, 14, 0.82);
+  --glass-border: rgba(201, 150, 42, 0.2);  /* borde dorado sutil */
+  --glass-blur:   20px;
+  --glass-blur-sm: 12px;
+
+  /* ── Texto ──────────────────────────────────────── */
+  --text:       #f0ead8;   /* blanco cálido — no frío puro    */
+  --text-muted: rgba(240, 234, 216, 0.58);
+  --text-dim:   rgba(240, 234, 216, 0.32);
+
+  /* ── Tipografía ─────────────────────────────────── */
+  --font-heading: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+  --font-body:    'Inter',      'Helvetica Neue', Arial, sans-serif;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  1.875rem;
+  --text-4xl:  2.25rem;
+
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-black:    900;
+
+  /* ── Espaciado ──────────────────────────────────── */
+  --sp-1:  0.25rem;  --sp-2:  0.5rem;   --sp-3:  0.75rem;
+  --sp-4:  1rem;     --sp-5:  1.25rem;  --sp-6:  1.5rem;
+  --sp-8:  2rem;     --sp-10: 2.5rem;   --sp-12: 3rem;
+
+  /* ── Radios — menos pill, más elegante ──────────── */
+  --r-sm:   0.375rem;
+  --r-md:   0.75rem;
+  --r-lg:   1.25rem;
+  --r-xl:   1.75rem;
+  --r-2xl:  2.25rem;
+  --r-full: 9999px;
+
+  /* ── Transiciones — más lentas y suaves ─────────── */
+  --t-fast:   200ms ease;
+  --t-base:   320ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --t-smooth: 480ms ease;
+
+  /* ── Touch target WCAG ──────────────────────────── */
+  --touch-min: 3rem;
+
+  /* ── Layout ─────────────────────────────────────── */
+  --page-pad: 1.25rem;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   2. RESET & BASE
+   ───────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-deep);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--fw-normal);
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--bg);
+  max-width: 480px;
+  margin-inline: auto;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img, picture, video, svg { display: block; max-width: 100%; }
+input, button, textarea, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
+ol, ul { list-style: none; }
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  line-height: 1.1;
+  font-weight: var(--fw-black);
+  text-rendering: optimizeLegibility;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   3. FOCUS
+   ───────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+:focus:not(:focus-visible) { outline: none; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   4. LAYOUT BASE
+   ───────────────────────────────────────────────────────────── */
+.section {
+  width: 100%;
+  padding: var(--sp-12) var(--page-pad);
+}
+
+/* Título — todo dorado, sin gradiente de colores */
+.section__title {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-black);
+  text-align: center;
+  margin-bottom: var(--sp-8);
+  color: var(--gold-light);
+  text-shadow:
+    0 0 20px rgba(201, 150, 42, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  letter-spacing: 0.02em;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   5. BOTONES — Gold premium
+   ───────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--sp-4) var(--sp-6);
+  border: none;
+  border-radius: var(--r-lg);    /* menos pill que el candy */
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  transition:
+    transform  var(--t-base),
+    box-shadow var(--t-smooth),
+    filter     var(--t-fast);
+}
+
+/* Brillo de lujo — más sutil que en candy */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    112deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.14) 50%,
+    transparent 75%
+  );
+  transform: translateX(-150%);
+  transition: transform 0.8s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+.btn:hover::before { transform: translateX(150%); }
+
+.btn__icon,
+.btn > span { position: relative; z-index: 2; }
+
+.btn:active {
+  transform: scale(0.97) translateY(1px) !important;
+  transition-duration: 100ms;
+}
+
+.btn__icon { font-size: 1.15em; line-height: 1; flex-shrink: 0; }
+
+/* ── Botón primario — oro bruñido ─────────────────── */
+.btn--primary {
+  background: linear-gradient(
+    160deg,
+    var(--gold-light) 0%,
+    var(--gold)       50%,
+    var(--gold-dark)  100%
+  );
+  color: #100800;            /* texto casi negro sobre oro = máximo contraste */
+  box-shadow:
+    var(--glow-gold),
+    0 8px 28px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(232, 187, 90, 0.4);
+}
+.btn--primary:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow:
+    0 0 28px rgba(201, 150, 42, 0.65),
+    0 0 60px rgba(201, 150, 42, 0.25),
+    0 12px 36px rgba(0, 0, 0, 0.65),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  filter: brightness(1.06);
+}
+
+/* ── Botón secundario — contorno dorado fino ───────── */
+.btn--secondary {
+  background: rgba(201, 150, 42, 0.08);
+  color: var(--gold-light);
+  border: 1.5px solid rgba(201, 150, 42, 0.5);
+  box-shadow:
+    inset 0 0 20px rgba(201, 150, 42, 0.04),
+    0 0 14px rgba(201, 150, 42, 0.15);
+  text-shadow: 0 0 10px rgba(201, 150, 42, 0.4);
+}
+.btn--secondary:hover {
+  background: rgba(201, 150, 42, 0.14);
+  border-color: var(--gold);
+  transform: scale(1.02) translateY(-1px);
+  box-shadow:
+    inset 0 0 24px rgba(201, 150, 42, 0.08),
+    0 0 24px rgba(201, 150, 42, 0.38),
+    0 8px 22px rgba(0, 0, 0, 0.45);
+}
+
+/* ── Botón WhatsApp — igual de visible ────────────── */
+.btn--whatsapp {
+  background: linear-gradient(135deg, #2bda6e 0%, var(--wapp-dark) 100%);
+  color: #fff;
+  box-shadow: var(--glow-green), 0 8px 28px rgba(0, 0, 0, 0.55);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  border-radius: var(--r-lg);
+  animation: pulse-whatsapp 3s ease-in-out infinite;
+}
+.btn--whatsapp:hover {
+  transform: scale(1.03) translateY(-2px);
+  box-shadow:
+    0 0 35px rgba(43, 218, 110, 0.75),
+    0 0 75px rgba(43, 218, 110, 0.3),
+    0 12px 36px rgba(0, 0, 0, 0.6);
+  animation-play-state: paused;
+}
+
+/* ── Loading ──────────────────────────────────────── */
+.btn--loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.btn--loading::before { display: none; }
+
+/* ── CTA hero ─────────────────────────────────────── */
+.btn--cta {
+  min-height: 4rem;
+  padding: var(--sp-5) var(--sp-8);
+  font-size: var(--text-xl);
+  letter-spacing: 0.12em;
+  animation: pulse-cta-gold 2.8s ease-in-out infinite;
+}
+.btn--cta:hover { animation-play-state: paused; }
+
+
+/* ─────────────────────────────────────────────────────────────
+   6. HERO — Overlays más oscuros · Tipografía premium
+   ───────────────────────────────────────────────────────────── */
+.section--hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding-top: var(--sp-5);
+  padding-bottom: var(--sp-10);
+  position: relative;
+  overflow: hidden;
+
+  /*
+   * Overlay más opaco: la foto es atmósfera, no diseño.
+   * Todo lo que el usuario lee flota sobre negro-violeta profundo.
+   */
+  background-image:
+    linear-gradient(
+      to bottom,
+      rgba(6, 4, 14, 0.98) 0%,
+      rgba(6, 4, 14, 0.6)  14%,
+      transparent          26%
+    ),
+    linear-gradient(
+      to top,
+      rgba(6, 4, 14, 0.98) 0%,
+      rgba(6, 4, 14, 0.65) 20%,
+      transparent          36%
+    ),
+    linear-gradient(
+      165deg,
+      rgba(6,   4,  14, 0.88) 0%,
+      rgba(40, 20,  60, 0.62) 40%,
+      rgba(10,  5,  30, 0.72) 70%,
+      rgba(6,   4,  14, 0.90) 100%
+    ),
+    url('../assets/hero-slots.jpg');
+  background-size: cover;
+  background-position: center 35%;
+  background-repeat: no-repeat;
+}
+
+/* Vignette lateral izquierda — profundidad cinematográfica */
+.section--hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 70% 60% at 0% 50%,
+      rgba(6, 4, 14, 0.55) 0%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse 70% 60% at 100% 50%,
+      rgba(6, 4, 14, 0.55) 0%,
+      transparent 100%
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Línea decorativa horizontal — separador de marca */
+.section--hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 150, 42, 0.5) 30%,
+    rgba(232, 187, 90, 0.7) 50%,
+    rgba(201, 150, 42, 0.5) 70%,
+    transparent
+  );
+  z-index: 1;
+}
+
+/* ── Marca ─────────────────────────────────────────── */
+.hero__brand {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.brand__name {
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.32em;   /* espaciado muy amplio = lujo */
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow:
+    0 0 14px rgba(201, 150, 42, 0.7),
+    0 0 35px rgba(201, 150, 42, 0.25),
+    0 1px 3px rgba(0, 0, 0, 0.9);
+  /* Sin animación flicker — más serio */
+}
+
+/* ── Selector de idioma ───────────────────────────── */
+.lang-switcher {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-2);
+  position: relative;
+  z-index: 2;
+}
+
+.lang-btn {
+  min-height: var(--touch-min);
+  min-width: var(--touch-min);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-2) var(--sp-4);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(201, 150, 42, 0.2);
+  border-radius: var(--r-full);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    border-color var(--t-fast),
+    color        var(--t-fast),
+    background   var(--t-fast),
+    box-shadow   var(--t-fast);
+}
+
+.lang-btn--active,
+.lang-btn:hover {
+  border-color: var(--gold);
+  color: var(--gold-light);
+  background: rgba(201, 150, 42, 0.1);
+  box-shadow:
+    0 0 12px rgba(201, 150, 42, 0.28),
+    inset 0 0 8px rgba(201, 150, 42, 0.05);
+  text-shadow: 0 0 8px rgba(201, 150, 42, 0.6);
+}
+
+/* ── Card principal del hero ──────────────────────── */
+.hero__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-5);
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  background: var(--glass);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);  /* borde dorado sutil */
+  border-radius: var(--r-2xl);
+  padding: var(--sp-8) var(--sp-5);
+  box-shadow:
+    inset 0 1px 0 rgba(201, 150, 42, 0.12),
+    inset 0 -1px 0 rgba(201, 150, 42, 0.06),
+    0 28px 70px rgba(0, 0, 0, 0.75),
+    0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Badge FREE PLAY — dorado, sin flotación */
+.hero__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: var(--sp-2) var(--sp-6);
+  background: linear-gradient(
+    135deg,
+    rgba(201, 150, 42, 0.18),
+    rgba(107, 78, 16, 0.12)
+  );
+  border: 1px solid rgba(201, 150, 42, 0.45);
+  border-radius: var(--r-sm);   /* más rectangular = más serio */
+  font-family: var(--font-heading);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-black);
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-shadow: 0 0 10px rgba(201, 150, 42, 0.7);
+  box-shadow:
+    0 0 16px rgba(201, 150, 42, 0.2),
+    inset 0 0 14px rgba(201, 150, 42, 0.06);
+  /* Sin animación float — más estatuesco, más serio */
+}
+
+/* Eyebrow */
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  padding: var(--sp-1) var(--sp-4);
+  background: rgba(201, 150, 42, 0.08);
+  border: 1px solid rgba(201, 150, 42, 0.28);
+  border-radius: var(--r-full);
+  font-size: var(--text-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(201, 150, 42, 0.5);
+}
+
+/* Headline — todo dorado, sin gradiente de colores */
+.hero__headline {
+  font-size: clamp(2.25rem, 10.5vw, 3.25rem);
+  font-weight: var(--fw-black);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  color: var(--gold-pale);
+  text-shadow:
+    0 0 24px rgba(201, 150, 42, 0.5),
+    0 0 60px rgba(201, 150, 42, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.95);
+  /* Sin background-clip gradient — texto sólido cálido */
+}
+
+/* Subheadline */
+.hero__subheadline {
+  font-size: var(--text-lg);
+  font-weight: var(--fw-medium);  /* más ligero que bold = más elegante */
+  color: var(--text-muted);
+  line-height: 1.55;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.95);
+}
+
+/* Trust badges */
+.hero__trust {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: rgba(201, 150, 42, 0.65);
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   7. CÓMO FUNCIONA — Contenido sobre fondo oscuro · Línea dorada
+   ───────────────────────────────────────────────────────────── */
+.section--how {
+  position: relative;
+  padding: var(--sp-12) var(--page-pad);
+
+  /* Overlay más opaco — foto casi invisible como fondo */
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6, 4, 14, 0.97) 0%,
+      rgba(16, 8, 36, 0.88) 30%,
+      rgba(10, 6, 24, 0.92) 70%,
+      rgba(6, 4, 14, 0.98) 100%
+    ),
+    url('../assets/casino-floor.jpg');
+  background-size: cover;
+  background-position: center 40%;
+}
+
+/* Separador dorado fino */
+.section--how::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 150, 42, 0.55) 30%,
+    rgba(232, 187, 90, 0.7) 50%,
+    rgba(201, 150, 42, 0.55) 70%,
+    transparent
+  );
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+/* Card — borde dorado uniforme (no hay color-coding por paso) */
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(201, 150, 42, 0.18);
+  border-radius: var(--r-lg);
+  padding: var(--sp-5);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(201, 150, 42, 0.08);
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity     0.55s ease,
+    transform   0.55s ease,
+    box-shadow  var(--t-fast),
+    border-color var(--t-fast);
+}
+
+.step:nth-child(1) { transition-delay: 0.05s; }
+.step:nth-child(2) { transition-delay: 0.2s;  }
+.step:nth-child(3) { transition-delay: 0.35s; }
+
+.step.fade-in-up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.step:hover {
+  border-color: rgba(201, 150, 42, 0.38);
+  box-shadow:
+    0 8px 30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(201, 150, 42, 0.14),
+    0 0 0 1px rgba(201, 150, 42, 0.08);
+  transform: translateY(-2px);
+}
+
+/* Número — todos dorados, estilo moneda */
+.step__number {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: var(--r-full);
+  background: linear-gradient(145deg, var(--gold-light), var(--gold-dark));
+  color: #0e0800;
+  font-family: var(--font-heading);
+  font-size: var(--text-lg);
+  font-weight: var(--fw-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--glow-gold), 0 4px 10px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.step__content { padding-top: 0.15rem; }
+
+.step__heading {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: var(--text-base);
+  font-weight: var(--fw-bold);
+  color: var(--gold-pale);
+  margin-bottom: var(--sp-1);
+  letter-spacing: 0.02em;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.8);
+}
+
+.step__body {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   8. CONVERSIÓN — Fondo oscuro · WhatsApp + form
+   ───────────────────────────────────────────────────────────── */
+.section--convert {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-8);
+  position: relative;
+  padding: var(--sp-12) var(--page-pad);
+  overflow: hidden;
+
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(6, 4, 14, 0.98) 0%,
+      rgba(20, 10, 40, 0.90) 40%,
+      rgba(6, 4, 14, 0.98) 100%
+    ),
+    url('../assets/poker-bar.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Separador dorado superior */
+.section--convert::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--page-pad);
+  right: var(--page-pad);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 150, 42, 0.55) 30%,
+    rgba(232, 187, 90, 0.7) 50%,
+    rgba(201, 150, 42, 0.55) 70%,
+    transparent
+  );
+}
+
+.convert__whatsapp {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  text-align: center;
+}
+
+.convert__body {
+  font-size: var(--text-base);
+  color: var(--text-muted);
+  line-height: 1.65;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.8);
+}
+
+.convert__divider {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: var(--text-dim);
+  font-size: var(--text-sm);
+}
+.convert__divider::before,
+.convert__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 150, 42, 0.2),
+    transparent
+  );
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   9. FORMULARIO — Glass dorado
+   ───────────────────────────────────────────────────────────── */
+.lead-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  background: var(--glass);
+  backdrop-filter: blur(var(--glass-blur-sm));
+  -webkit-backdrop-filter: blur(var(--glass-blur-sm));
+  border: 1px solid rgba(201, 150, 42, 0.18);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6);
+  box-shadow:
+    inset 0 1px 0 rgba(201, 150, 42, 0.1),
+    0 22px 55px rgba(0, 0, 0, 0.6);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.field__label {
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  color: rgba(201, 150, 42, 0.65);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.field__input {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: var(--sp-3) var(--sp-4);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(201, 150, 42, 0.2);
+  border-radius: var(--r-md);
+  color: var(--text);
+  font-size: var(--text-base);
+  -webkit-appearance: none;
+  appearance: none;
+  transition:
+    border-color  var(--t-fast),
+    box-shadow    var(--t-fast),
+    background    var(--t-fast);
+}
+
+.field__input::placeholder { color: rgba(240, 234, 216, 0.24); }
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--gold);
+  background: rgba(201, 150, 42, 0.06);
+  box-shadow:
+    0 0 0 3px rgba(201, 150, 42, 0.14),
+    0 0 16px rgba(201, 150, 42, 0.08);
+}
+
+.field__input:user-invalid,
+.field__input:not(:placeholder-shown):invalid {
+  border-color: rgba(220, 80, 80, 0.55);
+  box-shadow: 0 0 0 3px rgba(220, 80, 80, 0.12);
+}
+
+.btn--submit { margin-top: var(--sp-2); }
+
+.form__success {
+  text-align: center;
+  color: #7fffb4;
+  font-size: var(--text-sm);
+  font-weight: var(--fw-medium);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid rgba(127, 255, 180, 0.22);
+  border-radius: var(--r-md);
+  background: rgba(37, 211, 102, 0.07);
+  text-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   10. PRE-FOOTER — Leyendas legales IPJyC
+   ───────────────────────────────────────────────────────────── */
+.prefooter {
+  background: #040208;
+  border-top: 1px solid rgba(201, 150, 42, 0.15);
+  padding: var(--sp-6) var(--page-pad) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+}
+
+.prefooter__badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+}
+
+.legal-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.legal-badge--responsible {
+  background: rgba(0, 80, 24, 0.2);
+  border: 1px solid rgba(37, 211, 102, 0.25);
+  border-radius: var(--r-md);
+  padding: var(--sp-3) var(--sp-4);
+  gap: var(--sp-3);
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+
+.legal-badge__icon  { font-size: 1.8rem; line-height: 1; flex-shrink: 0; }
+
+.legal-badge__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.legal-badge__title {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: var(--fw-black);
+  letter-spacing: 0.12em;
+  color: #2bda6e;
+  text-shadow: 0 0 8px rgba(43, 218, 110, 0.4);
+}
+
+.legal-badge__sub {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.3;
+}
+
+.legal-badge__phones {
+  font-size: 0.62rem;
+  color: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.legal-phone {
+  color: #2bda6e;
+  text-decoration: none;
+  font-weight: var(--fw-medium);
+  transition: text-shadow var(--t-fast);
+}
+.legal-phone:hover { text-shadow: 0 0 8px rgba(43, 218, 110, 0.7); }
+
+.legal-badge--age { flex-shrink: 0; }
+
+.age-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--r-full);
+  border: 2px solid rgba(201, 150, 42, 0.65);
+  color: var(--gold);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-black);
+  text-shadow: 0 0 8px rgba(201, 150, 42, 0.6);
+  box-shadow:
+    0 0 10px rgba(201, 150, 42, 0.18),
+    inset 0 0 10px rgba(201, 150, 42, 0.05);
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
+}
+
+.legal-badge--exclusion {
+  background: rgba(155, 31, 82, 0.1);
+  border: 1px solid rgba(155, 31, 82, 0.28);
+  border-radius: var(--r-full);
+  padding: var(--sp-2) var(--sp-4);
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.exclusion-icon  { font-size: 1rem; line-height: 1; }
+
+.exclusion-label {
+  font-family: var(--font-heading);
+  font-size: 0.62rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.25;
+  text-align: center;
+}
+
+.legal-badge--ipjyc {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(201, 150, 42, 0.15);
+  border-radius: var(--r-md);
+  padding: var(--sp-2) var(--sp-4);
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+.ipjyc-gov { font-size: 1.4rem; line-height: 1; }
+
+.ipjyc-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.ipjyc-text strong {
+  font-family: var(--font-heading);
+  font-size: 0.65rem;
+  font-weight: var(--fw-black);
+  letter-spacing: 0.1em;
+  color: rgba(240, 234, 216, 0.8);
+}
+
+.ipjyc-text span {
+  font-size: 0.58rem;
+  color: rgba(240, 234, 216, 0.4);
+  letter-spacing: 0.06em;
+}
+
+.ipjyc-text em {
+  font-style: normal;
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: var(--fw-bold);
+  color: var(--gold);
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 8px rgba(201, 150, 42, 0.3);
+}
+
+.prefooter__warnings {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-top: var(--sp-3);
+  border-top: 1px solid rgba(201, 150, 42, 0.08);
+  text-align: center;
+}
+
+.prefooter__warn {
+  font-size: var(--text-xs);
+  color: rgba(240, 234, 216, 0.45);
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.prefooter__warn--health { color: rgba(201, 150, 42, 0.55); }
+
+
+/* ─────────────────────────────────────────────────────────────
+   11. FOOTER
+   ───────────────────────────────────────────────────────────── */
+.site-footer {
+  background: var(--bg-deep);
+  border-top: 1px solid rgba(201, 150, 42, 0.1);
+  padding: var(--sp-6) var(--page-pad);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.footer__legal,
+.footer__address {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   12. NOSCRIPT
+   ───────────────────────────────────────────────────────────── */
+.noscript-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: rgba(6, 4, 14, 0.96);
+  border-top: 1px solid rgba(201, 150, 42, 0.3);
+  padding: var(--sp-4) var(--page-pad);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  z-index: 100;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.noscript-banner a {
+  color: #2bda6e;
+  font-weight: var(--fw-semibold);
+  text-shadow: 0 0 8px rgba(43, 218, 110, 0.5);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   13. UTILIDADES
+   ───────────────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   14. KEYFRAMES — Más lentos y contenidos
+   ───────────────────────────────────────────────────────────── */
+
+/* CTA hero — pulso dorado suave */
+@keyframes pulse-cta-gold {
+  0%, 100% {
+    box-shadow:
+      0 0 18px rgba(201, 150, 42, 0.5),
+      0 0 45px rgba(201, 150, 42, 0.18),
+      0 8px 28px rgba(0, 0, 0, 0.6);
+  }
+  50% {
+    box-shadow:
+      0 0 32px rgba(201, 150, 42, 0.75),
+      0 0 70px rgba(232, 187, 90, 0.28),
+      0 8px 28px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* WhatsApp — pulso verde contenido */
+@keyframes pulse-whatsapp {
+  0%, 100% {
+    box-shadow:
+      0 0 18px rgba(43, 218, 110, 0.48),
+      0 0 45px rgba(43, 218, 110, 0.16),
+      0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+  50% {
+    box-shadow:
+      0 0 32px rgba(43, 218, 110, 0.7),
+      0 0 65px rgba(43, 218, 110, 0.26),
+      0 8px 28px rgba(0, 0, 0, 0.55);
+  }
+}
+
+/* Fade-in para steps */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   15. PREFERS-REDUCED-MOTION
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+  }
+  .btn--cta, .btn--whatsapp { animation: none; }
+  .step { opacity: 1; transform: none; }
+  .step.fade-in-up { transition: none; }
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+   16. RESPONSIVE > 480 px
+   ───────────────────────────────────────────────────────────── */
+@media (min-width: 481px) {
+  .hero__content {
+    padding: var(--sp-10) var(--sp-8);
+  }
+
+  .btn--cta {
+    font-size: var(--text-2xl);
+    min-height: 4.25rem;
+  }
+
+  .section__title {
+    font-size: var(--text-3xl);
+  }
+}
