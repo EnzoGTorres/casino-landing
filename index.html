@@ -1,326 +1,548 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="no-js">
+<html lang="es-AR" class="no-js">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- ═══ SEO BÁSICO ═══════════════════════════════════════════ -->
-    <title data-i18n-title="page.title">Casino del Hyatt Mendoza — Ganhe crédito grátis!</title>
+    <!-- ═══ SEO ════════════════════════════════════════════════════ -->
+    <title>Dreams Plaza Casino — Entretenimiento Nocturno en Mendoza</title>
     <meta
       name="description"
-      content="Jogue no Casino del Hyatt Mendoza. Carregue crédito com QR, Pix ou carteira digital. A 1 minuto de você."
-      data-i18n-meta-description="page.description"
+      content="Dreams Plaza, el punto de encuentro de Mendoza. Poker, gastronomía, shows en vivo y deportes. Viví una noche que no olvidás."
     />
     <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://casino-mendoza.vercel.app/" />
+    <link rel="canonical" href="https://dreamsplaza.com.ar/" />
 
     <!-- ═══ OPEN GRAPH ════════════════════════════════════════════ -->
     <meta property="og:type"        content="website" />
-    <meta property="og:locale"      content="pt_BR" />
-    <meta property="og:site_name"   content="Casino del Hyatt Mendoza" />
-    <meta property="og:url"         content="https://casino-mendoza.vercel.app/" />
-    <meta property="og:title"       content="Casino del Hyatt Mendoza — Ganhe crédito grátis!" />
-    <meta property="og:description" content="Jogue no Casino del Hyatt Mendoza. Carregue crédito com QR, Pix ou carteira digital. A 1 minuto de você." />
-    <meta property="og:image"       content="https://casino-mendoza.vercel.app/assets/og-image.jpg" />
+    <meta property="og:locale"      content="es_AR" />
+    <meta property="og:site_name"   content="Dreams Plaza Casino" />
+    <meta property="og:url"         content="https://dreamsplaza.com.ar/" />
+    <meta property="og:title"       content="Dreams Plaza — La Noche Es Tuya" />
+    <meta property="og:description" content="Poker, gastronomía, shows en vivo y deportes. El punto de encuentro de Mendoza." />
+    <meta property="og:image"       content="https://dreamsplaza.com.ar/assets/og-image.jpg" />
     <meta property="og:image:width"  content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt"    content="Hyatt Casino Mendoza" />
+    <meta property="og:image:alt"    content="Dreams Plaza Casino Mendoza" />
 
-    <!-- ═══ TWITTER CARD ══════════════════════════════════════════ -->
+    <!-- ═══ TWITTER CARD ════════════════════════════════════════ -->
     <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content="Casino del Hyatt Mendoza — Ganhe crédito grátis!" />
-    <meta name="twitter:description" content="Carregue crédito com QR, Pix ou carteira digital. A 1 minuto de você." />
-    <meta name="twitter:image"       content="https://casino-mendoza.vercel.app/assets/og-image.jpg" />
+    <meta name="twitter:title"       content="Dreams Plaza — La Noche Es Tuya" />
+    <meta name="twitter:description" content="Poker, gastronomía, shows y deportes. Mendoza." />
+    <meta name="twitter:image"       content="https://dreamsplaza.com.ar/assets/og-image.jpg" />
 
-    <!-- ═══ PWA / DISPOSITIVO ════════════════════════════════════ -->
-    <meta name="theme-color" content="#05000f" />
-    <meta name="mobile-web-app-capable"       content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <!-- ═══ PWA / DISPOSITIVO ══════════════════════════════════ -->
+    <meta name="theme-color" content="#06040e" />
+    <meta name="mobile-web-app-capable"        content="yes" />
+    <meta name="apple-mobile-web-app-capable"  content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="format-detection" content="telephone=no" />
 
-    <!-- ═══ PRELOAD IMÁGENES CRÍTICAS (LCP) ════════════════════ -->
-    <!-- Renombrar las fotos del casino y colocar en /assets/ -->
-    <link rel="preload" as="image" href="assets/hero-slots.jpg" />
-    <link rel="preload" as="image" href="assets/casino-floor.jpg" />
+    <!-- ═══ PRELOADS LCP ════════════════════════════════════════ -->
+    <link rel="preload" as="image" href="assets/poker-bar.jpg" />
 
-    <!-- ═══ FUENTES — Montserrat (headings) + Inter (body) ═══ -->
+    <!-- ═══ FUENTES — Barlow Condensed (display) + Inter (body) ═ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;900&family=Inter:wght@400;500;600&display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;0,900;1,700&family=Barlow:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    />
 
-    <!-- ═══ ESTILOS ══════════════════════════════════════════════ -->
-    <!-- Para volver al tema candy/neon: cambiar por css/styles.css -->
+    <!-- ═══ ESTILOS ════════════════════════════════════════════ -->
     <link rel="stylesheet" href="css/styles-premium.css" />
 
-    <!-- ═══ DATOS ESTRUCTURADOS (JSON-LD) ════════════════════════ -->
+    <!-- ═══ DATOS ESTRUCTURADOS ════════════════════════════════ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "CasinoOrGamblingArea",
-      "name": "Casino del Hyatt Mendoza",
+      "@type": "EntertainmentBusiness",
+      "name": "Dreams Plaza Casino",
+      "description": "Casino y entretenimiento nocturno en Mendoza. Poker, gastronomía, shows en vivo y deportes.",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "25 de mayo 1115",
+        "streetAddress": "25 de Mayo 1115",
         "addressLocality": "Mendoza",
         "addressCountry": "AR"
       },
       "telephone": "+54-261-000-0000",
-      "url": "https://casino-mendoza.vercel.app/"
+      "url": "https://dreamsplaza.com.ar/",
+      "sameAs": [
+        "https://instagram.com/dreamsplazamendoza"
+      ]
     }
     </script>
 
-    <!-- Quita clase no-js en cuanto carga el JS -->
     <script>document.documentElement.classList.remove('no-js');</script>
   </head>
 
   <body>
 
     <!-- ═══════════════════════════════════════════════════════════
-         SECCIÓN 1 — HERO
-         Objetivo: hook + beneficio en < 5 segundos
+         NAV — Sticky con blur en scroll
     ═══════════════════════════════════════════════════════════════ -->
-    <header class="section section--hero" id="hero">
-
-      <!-- Marca -->
-      <div class="hero__brand" aria-label="Hyatt Casino Mendoza">
-        <span class="brand__name" data-i18n="brand.name">Hyatt Casino Mendoza</span>
+    <nav class="site-nav" id="nav" aria-label="Navegación principal">
+      <div class="nav__inner">
+        <a href="#hero" class="nav__brand" aria-label="Dreams Plaza — inicio">
+          <span class="nav__brand-name">DREAMS PLAZA</span>
+          <span class="nav__brand-sub">Casino &amp; Entertainment</span>
+        </a>
+        <div class="nav__actions">
+          <a href="#eventos" class="nav__link nav__link--hidden">Eventos</a>
+          <a href="#gastronomia" class="nav__link nav__link--hidden">Gastronomía</a>
+          <a href="#poker" class="nav__link nav__link--hidden">Poker</a>
+          <a
+            class="btn-nav"
+            href="#eventos"
+            data-event="cta_nav_agenda"
+            aria-label="Ver agenda de eventos"
+          >Ver agenda →</a>
+        </div>
       </div>
+    </nav>
 
-      <!-- Selector de idioma -->
-      <nav class="lang-switcher" aria-label="Selecionar idioma">
-        <button type="button" class="lang-btn lang-btn--active"
-                data-lang="pt" aria-label="Português" aria-pressed="true">
-          🇧🇷 PT
-        </button>
-        <button type="button" class="lang-btn"
-                data-lang="en" aria-label="English" aria-pressed="false">
-          🇺🇸 EN
-        </button>
-        <button type="button" class="lang-btn"
-                data-lang="es" aria-label="Español" aria-pressed="false">
-          🇦🇷 ES
-        </button>
-      </nav>
 
-      <!-- Contenido principal -->
+    <!-- ═══════════════════════════════════════════════════════════
+         SECCIÓN 1 — HERO CINEMATOGRÁFICO
+         Objetivo: impacto visual inmediato + experiencia lifestyle
+    ═══════════════════════════════════════════════════════════════ -->
+    <header class="section section--hero" id="hero" aria-label="Bienvenida a Dreams Plaza">
+
+      <div class="hero__overlay" aria-hidden="true"></div>
+
       <div class="hero__content">
 
-        <!-- Badge FREE PLAY — primer impacto visual -->
-        <div class="hero__badge" data-i18n="hero.badge" aria-label="Oferta especial">
-          🎰 FREE PLAY GRÁTIS
+        <!-- Tag de estado -->
+        <div class="hero__tag" aria-label="Mendoza, abierto hoy">
+          <span class="hero__tag-dot" aria-hidden="true"></span>
+          Mendoza · Abierto Hoy
+          <span class="hero__tag-dot" aria-hidden="true"></span>
         </div>
 
-        <p class="hero__eyebrow" data-i18n="hero.eyebrow" aria-hidden="true">
-          A 1 minuto de você
-        </p>
-
-        <h1 class="hero__headline" data-i18n="hero.headline">
-          Jogue no Hyatt Casino Mendoza
+        <!-- Headline principal — editorial, cinematográfico, sin efectos -->
+        <h1 class="hero__headline" aria-label="Donde pasa todo — Dreams Plaza Casino">
+          <span class="hero__line hero__line--1">DONDE PASA</span>
+          <span class="hero__line hero__line--2">TODO</span>
         </h1>
 
-        <p class="hero__subheadline" data-i18n="hero.subheadline">
-          Ganhe crédito grátis para jogar agora
+        <!-- Subheadline editorial — preciso y lifestyle -->
+        <p class="hero__subheadline">
+          Poker, gastronomía, shows y experiencias en un solo lugar.
         </p>
 
-        <!-- CTA principal -->
-        <a
-          class="btn btn--primary btn--cta"
-          href="https://wa.me/5402610000000?text=Quero+meu+crédito+grátis"
-          target="_blank"
-          rel="noopener noreferrer"
-          data-i18n-href="hero.whatsappUrl"
-          data-i18n-aria-label="hero.cta.ariaLabel"
-          data-event="cta_whatsapp_hero"
-          aria-label="Ganhar crédito grátis pelo WhatsApp"
-        >
-          <span class="btn__icon" aria-hidden="true">💬</span>
-          <span data-i18n="hero.cta">GANHAR CRÉDITO</span>
-        </a>
+        <!-- CTAs -->
+        <div class="hero__ctas">
+          <a
+            class="btn btn--hero-primary"
+            href="https://wa.me/5402610000000?text=Hola%2C+quiero+reservar+en+Dreams+Plaza"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-event="cta_whatsapp_hero"
+            aria-label="Reservar por WhatsApp"
+          >
+            <span class="btn__icon" aria-hidden="true">💬</span>
+            <span>Reservar por WhatsApp</span>
+          </a>
+          <a class="btn btn--hero-ghost" href="#eventos" aria-label="Ver agenda de eventos">
+            <span>Ver agenda →</span>
+          </a>
+        </div>
 
-        <!-- Micro-validación -->
-        <p class="hero__trust" data-i18n="hero.trust">
-          ✓ Gratuito · ✓ Sem fila · ✓ Agora
-        </p>
+        <!-- Pillars rápidos -->
+        <div class="hero__tags" role="list" aria-label="Lo que encontrás en Dreams Plaza">
+          <span role="listitem">🃏 Poker</span>
+          <span class="tag-sep" aria-hidden="true">·</span>
+          <span role="listitem">🍖 Parrilla</span>
+          <span class="tag-sep" aria-hidden="true">·</span>
+          <span role="listitem">🎵 Shows</span>
+          <span class="tag-sep" aria-hidden="true">·</span>
+          <span role="listitem">📺 Deportes</span>
+        </div>
+
+      </div>
+
+      <!-- Indicador de scroll -->
+      <div class="hero__scroll" aria-hidden="true">
+        <span class="scroll-line"></span>
       </div>
 
     </header><!-- /hero -->
 
 
-    <!-- ═══════════════════════════════════════════════════════════
-         MAIN — Secciones de contenido
-    ═══════════════════════════════════════════════════════════════ -->
     <main id="main-content">
 
       <!-- ──────────────────────────────────────────────────────
-           SECCIÓN 2 — CÓMO FUNCIONA (3 pasos)
-           Objetivo: eliminar dudas rápido
+           SECCIÓN 2 — EXPERIENCIAS (4 pillars)
+           Objetivo: mostrar que hay mucho más que slots
       ────────────────────────────────────────────────────────── -->
-      <section class="section section--how" id="como-funciona" aria-labelledby="how-title">
+      <section class="section section--pillars" id="experiencias" aria-labelledby="pillars-title">
+        <div class="section__inner">
 
-        <h2 class="section__title" id="how-title" data-i18n="how.title">Como funciona?</h2>
+          <header class="section__header">
+            <span class="section__eyebrow">Todo en un solo lugar</span>
+            <h2 class="section__title" id="pillars-title">UNA EXPERIENCIA<br>COMPLETA</h2>
+          </header>
 
-        <ol class="steps">
+          <div class="pillars-grid">
 
-          <li class="step">
-            <span class="step__number" aria-hidden="true">1</span>
-            <div class="step__content">
-              <strong class="step__heading" data-i18n="how.step1.heading">Mostre este QR</strong>
-              <p class="step__body" data-i18n="how.step1.body">
-                Na entrada do casino, apresente a tela ao staff.
-              </p>
-            </div>
-          </li>
+            <article class="pillar-card pillar-card--poker" data-animate>
+              <div class="pillar-card__img" aria-hidden="true"></div>
+              <div class="pillar-card__body">
+                <div class="pillar-card__icon" aria-hidden="true">🃏</div>
+                <h3 class="pillar-card__title">POKER &amp;<br>JUEGOS</h3>
+                <p class="pillar-card__text">Texas Hold'em, Blackjack y más. Torneos semanales. Mesas para todos los niveles.</p>
+                <a href="#poker" class="pillar-card__cta" aria-label="Ver información de poker">Ver torneos →</a>
+              </div>
+            </article>
 
-          <li class="step">
-            <span class="step__number" aria-hidden="true">2</span>
-            <div class="step__content">
-              <strong class="step__heading" data-i18n="how.step2.heading">Receba seu crédito</strong>
-              <p class="step__body" data-i18n="how.step2.body">
-                Crédito grátis carregado nas máquinas. Sem depósito.
-              </p>
-            </div>
-          </li>
+            <article class="pillar-card pillar-card--gastro" data-animate>
+              <div class="pillar-card__img" aria-hidden="true"></div>
+              <div class="pillar-card__body">
+                <div class="pillar-card__icon" aria-hidden="true">🍖</div>
+                <h3 class="pillar-card__title">GASTRONOMÍA<br>&amp; BAR</h3>
+                <p class="pillar-card__text">Parrilla premium, tragos de autor y carta de vinos. Comer bien es parte de la noche.</p>
+                <a href="#gastronomia" class="pillar-card__cta" aria-label="Ver gastronomía">Ver menú →</a>
+              </div>
+            </article>
 
-          <li class="step">
-            <span class="step__number" aria-hidden="true">3</span>
-            <div class="step__content">
-              <strong class="step__heading" data-i18n="how.step3.heading">Jogue e divirta-se</strong>
-              <p class="step__body" data-i18n="how.step3.body">
-                Slots, roleta e muito mais. Mendoza te espera!
-              </p>
-            </div>
-          </li>
+            <article class="pillar-card pillar-card--shows" data-animate>
+              <div class="pillar-card__img" aria-hidden="true"></div>
+              <div class="pillar-card__body">
+                <div class="pillar-card__icon" aria-hidden="true">🎵</div>
+                <h3 class="pillar-card__title">SHOWS &amp;<br>MÚSICA</h3>
+                <p class="pillar-card__text">Artistas en vivo, DJs y eventos temáticos. La agenda que hace que el fin de semana valga.</p>
+                <a href="#eventos" class="pillar-card__cta" aria-label="Ver agenda de shows">Ver agenda →</a>
+              </div>
+            </article> 
 
-        </ol>
+            <article class="pillar-card pillar-card--sports" data-animate>
+              <div class="pillar-card__img" aria-hidden="true"></div>
+              <div class="pillar-card__body">
+                <div class="pillar-card__icon" aria-hidden="true">📺</div>
+                <h3 class="pillar-card__title">DEPORTES<br>EN VIVO</h3>
+                <p class="pillar-card__text">Las mejores pantallas de Mendoza. Champions, Libertadores, NBA, F1 y más.</p>
+                <a href="#eventos" class="pillar-card__cta" aria-label="Ver cartelera deportiva">Ver cartelera →</a>
+              </div>
+            </article>
 
-      </section><!-- /como-funciona -->
+          </div>
+        </div>
+      </section><!-- /pillars -->
 
 
       <!-- ──────────────────────────────────────────────────────
-           SECCIÓN 3 — CONVERSÃO (WhatsApp + formulario)
-           Objetivo: capturar el lead
+           SECCIÓN 3 — PRÓXIMOS EVENTOS
+           Objetivo: agenda de entretenimiento premium
       ────────────────────────────────────────────────────────── -->
-      <section class="section section--convert" id="conversao" aria-labelledby="convert-title">
+      <section class="section section--events" id="eventos" aria-labelledby="events-title">
+        <div class="section__inner">
 
-        <!-- CTA WhatsApp repetido (para quienes llegan scrolleando) -->
-        <div class="convert__whatsapp">
-          <h2 class="section__title" id="convert-title" data-i18n="convert.title">
-            Pronto para jogar?
-          </h2>
-          <p class="convert__body" data-i18n="convert.body">
-            Fale conosco agora pelo WhatsApp e reserve seu crédito grátis.
-          </p>
-          <a
-            class="btn btn--whatsapp"
-            href="https://wa.me/5402610000000?text=Quero+meu+crédito+grátis"
-            target="_blank"
-            rel="noopener noreferrer"
-            data-i18n-href="convert.whatsappUrl"
-            data-i18n-aria-label="convert.cta.ariaLabel"
-            data-event="cta_whatsapp_convert"
-            aria-label="Abrir WhatsApp para falar conosco"
-          >
-            <span class="btn__icon" aria-hidden="true">💬</span>
-            <span data-i18n="convert.cta">Falar no WhatsApp</span>
-          </a>
-        </div>
+          <header class="section__header">
+            <span class="section__eyebrow">No te lo perdás</span>
+            <h2 class="section__title" id="events-title">PRÓXIMOS<br>EVENTOS</h2>
+          </header>
 
-        <!-- Divisor -->
-        <div class="convert__divider" role="separator" aria-hidden="true">
-          <span data-i18n="convert.divider">ou deixe seu contato</span>
-        </div>
+          <div class="events-grid">
 
-        <!-- Formulario de captura de leads -->
-        <form class="lead-form" id="leadForm" novalidate aria-label="Formulário de contato">
+            <!-- Evento destacado -->
+            <article class="event-card event-card--featured" data-animate>
+              <div class="event-card__date" aria-label="Sábado 17 de Mayo">
+                <span class="event-card__day">SAB</span>
+                <span class="event-card__num">17</span>
+                <span class="event-card__month">MAY</span>
+              </div>
+              <div class="event-card__body">
+                <span class="event-card__tag">🃏 POKER NIGHT</span>
+                <h3 class="event-card__title">Gran Torneo de Poker</h3>
+                <p class="event-card__desc">Texas Hold'em abierto. Buy-in desde $5.000. Premios en efectivo. Inscripción desde las 20hs.</p>
+                <a
+                  href="https://wa.me/5402610000000?text=Quiero+anotarme+al+torneo+de+poker+del+17+de+mayo"
+                  class="event-card__cta btn-event"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-event="cta_event_poker_17"
+                  aria-label="Inscribirme al torneo de poker"
+                >Inscribirme →</a>
+              </div>
+            </article>
 
-          <div class="field">
-            <label class="field__label" for="field-name" data-i18n="form.name.label">
-              Nome
-            </label>
-            <input
-              class="field__input"
-              type="text"
-              id="field-name"
-              name="name"
-              autocomplete="name"
-              autocapitalize="words"
-              autocorrect="off"
-              spellcheck="false"
-              enterkeyhint="next"
-              data-i18n-placeholder="form.name.placeholder"
-              placeholder="Seu nome"
-              required
-              minlength="2"
-            />
+            <article class="event-card" data-animate>
+              <div class="event-card__date" aria-label="Viernes 23 de Mayo">
+                <span class="event-card__day">VIE</span>
+                <span class="event-card__num">23</span>
+                <span class="event-card__month">MAY</span>
+              </div>
+              <div class="event-card__body">
+                <span class="event-card__tag">🃏 BLACKJACK NIGHT</span>
+                <h3 class="event-card__title">Noche de Blackjack</h3>
+                <p class="event-card__desc">Mesas abiertas toda la noche, dealers en vivo y barra disponible. El mejor plan para el viernes.</p>
+                <a
+                  href="https://wa.me/5402610000000?text=Quiero+info+sobre+la+noche+de+blackjack+del+23+de+mayo"
+                  class="event-card__cta btn-event"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-event="cta_event_blackjack_23"
+                  aria-label="Consultar por la noche de blackjack"
+                >Consultar →</a>
+              </div>
+            </article>
+
+            <article class="event-card" data-animate>
+              <div class="event-card__date" aria-label="Sábado 24 de Mayo">
+                <span class="event-card__day">SAB</span>
+                <span class="event-card__num">24</span>
+                <span class="event-card__month">MAY</span>
+              </div>
+              <div class="event-card__body">
+                <span class="event-card__tag">🎵 SHOW EN VIVO</span>
+                <h3 class="event-card__title">Noche de Cumbia Sinfónica</h3>
+                <p class="event-card__desc">Banda en vivo, barra libre las primeras 2hs. Una noche para no quedarse en casa.</p>
+                <a
+                  href="https://wa.me/5402610000000?text=Quiero+info+sobre+el+show+del+sabado+24"
+                  class="event-card__cta btn-event"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-event="cta_event_show_24"
+                  aria-label="Ver detalle del show del sábado"
+                >Ver detalle →</a>
+              </div>
+            </article>
+
+            <article class="event-card" data-animate>
+              <div class="event-card__date" aria-label="Domingo 25 de Mayo">
+                <span class="event-card__day">DOM</span>
+                <span class="event-card__num">25</span>
+                <span class="event-card__month">MAY</span>
+              </div>
+              <div class="event-card__body">
+                <span class="event-card__tag">📺 DEPORTES</span>
+                <h3 class="event-card__title">Final Champions League</h3>
+                <p class="event-card__desc">Las pantallas más grandes de Mendoza. Barra especial, picadas y la mejor previa.</p>
+                <a
+                  href="https://wa.me/5402610000000?text=Quiero+reservar+para+la+final+de+champions"
+                  class="event-card__cta btn-event"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-event="cta_event_champions_25"
+                  aria-label="Reservar para la final"
+                >Reservar →</a>
+              </div>
+            </article>
+
           </div>
 
-          <div class="field">
-            <label class="field__label" for="field-whatsapp" data-i18n="form.phone.label">
-              WhatsApp
-            </label>
-            <input
-              class="field__input"
-              type="tel"
-              id="field-whatsapp"
-              name="whatsapp"
-              autocomplete="tel"
-              inputmode="tel"
-              autocorrect="off"
-              spellcheck="false"
-              enterkeyhint="send"
-              data-i18n-placeholder="form.phone.placeholder"
-              placeholder="+55 11 9 0000-0000"
-              required
-              minlength="7"
-            />
+          <div class="events-footer">
+            <a
+              href="https://wa.me/5402610000000?text=Quiero+ver+todos+los+eventos+de+Dreams+Plaza"
+              class="btn btn--events-all"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-event="cta_all_events"
+            >Ver todos los eventos →</a>
           </div>
 
-          <button
-            class="btn btn--secondary btn--submit"
-            type="submit"
-            data-event="cta_form_submit"
-          >
-            <span data-i18n="form.submit">Quero meu crédito</span>
-          </button>
+        </div>
+      </section><!-- /eventos -->
 
-          <!-- Mensaje de éxito (oculto por defecto) -->
-          <p
-            class="form__success"
-            id="formSuccess"
-            hidden
-            role="status"
-            aria-live="polite"
-            data-i18n="form.success"
-          >
-            ✓ Recebemos seu contato! Falaremos em instantes.
-          </p>
 
-        </form>
+      <!-- ──────────────────────────────────────────────────────
+           SECCIÓN 4 — POKER FEATURE
+           Objetivo: posicionar el poker como experiencia premium
+      ────────────────────────────────────────────────────────── -->
+      <section class="section section--poker" id="poker" aria-labelledby="poker-title">
+        <div class="poker__bg" aria-hidden="true"></div>
+        <div class="section__inner poker__inner">
+          <div class="poker__content" data-animate>
+            <span class="section__eyebrow">La mesa está lista</span>
+            <h2 class="section__title" id="poker-title">POKER &amp;<br>BLACKJACK</h2>
+            <p class="poker__body">
+              Desde jugadores casuales hasta torneos con premios reales.
+              Texas Hold'em, Blackjack, Punto y Banca y más.
+              Ambiente serio, dealers profesionales y la adrenalina de la partida perfecta.
+            </p>
+            <ul class="poker__features" aria-label="Características del área de juegos">
+              <li><span class="feature-check" aria-hidden="true">✓</span> Texas Hold'em todos los días</li>
+              <li><span class="feature-check" aria-hidden="true">✓</span> Torneos con premios los sábados</li>
+              <li><span class="feature-check" aria-hidden="true">✓</span> Blackjack y juegos clásicos</li>
+              <li><span class="feature-check" aria-hidden="true">✓</span> Servicio de mesa incluido</li>
+            </ul>
+            <a
+              class="btn btn--primary"
+              href="https://wa.me/5402610000000?text=Quiero+saber+más+sobre+el+poker+en+Dreams+Plaza"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-event="cta_whatsapp_poker"
+              aria-label="Consultar por torneos de poker"
+            >
+              <span class="btn__icon" aria-hidden="true">🃏</span>
+              <span>Consultar por torneos</span>
+            </a>
+          </div>
+        </div>
+      </section><!-- /poker -->
 
-      </section><!-- /conversao -->
+
+      <!-- ──────────────────────────────────────────────────────
+           SECCIÓN 5 — GASTRONOMÍA
+           Objetivo: posicionar como destino gastronómico
+      ────────────────────────────────────────────────────────── -->
+      <section class="section section--gastro" id="gastronomia" aria-labelledby="gastro-title">
+        <div class="section__inner">
+
+          <header class="section__header">
+            <span class="section__eyebrow">Comer bien es parte de la noche</span>
+            <h2 class="section__title" id="gastro-title">GASTRONOMÍA<br>&amp; BAR</h2>
+          </header>
+
+          <div class="gastro-grid">
+
+            <article class="gastro-card gastro-card--parrilla" data-animate>
+              <div class="gastro-card__img" aria-hidden="true"></div>
+              <div class="gastro-card__body">
+                <span class="gastro-card__icon" aria-hidden="true">🔥</span>
+                <h3 class="gastro-card__title">PARRILLA<br>PREMIUM</h3>
+                <p>Cortes de autor, cocción perfecta, vista a la parrilla. La mejor carne de Mendoza.</p>
+              </div>
+            </article>
+
+            <article class="gastro-card gastro-card--bar" data-animate>
+              <div class="gastro-card__img" aria-hidden="true"></div>
+              <div class="gastro-card__body">
+                <span class="gastro-card__icon" aria-hidden="true">🍸</span>
+                <h3 class="gastro-card__title">BARRA<br>DE TRAGOS</h3>
+                <p>Cócteles clásicos y de autor. Carta de vinos cuyana. Bartenders de experiencia.</p>
+              </div>
+            </article>
+
+            <article class="gastro-card gastro-card--menu" data-animate>
+              <div class="gastro-card__img" aria-hidden="true"></div>
+              <div class="gastro-card__body">
+                <span class="gastro-card__icon" aria-hidden="true">🍽️</span>
+                <h3 class="gastro-card__title">CARTA<br>COMPLETA</h3>
+                <p>Platos fríos, ensaladas, pastas y sándwiches premium. Servicio hasta el cierre.</p>
+              </div>
+            </article>
+
+          </div>
+
+          <div class="gastro-cta" data-animate>
+            <a
+              class="btn btn--primary"
+              href="https://wa.me/5402610000000?text=Quiero+reservar+una+mesa+en+Dreams+Plaza"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-event="cta_whatsapp_gastro"
+              aria-label="Reservar mesa en Dreams Plaza"
+            >
+              <span class="btn__icon" aria-hidden="true">📱</span>
+              <span>Reservar Mesa</span>
+            </a>
+          </div>
+
+        </div>
+      </section><!-- /gastronomia -->
+
+
+      <!-- ──────────────────────────────────────────────────────
+           SECCIÓN 6 — GALERÍA DE AMBIENTE
+           Objetivo: mostrar el ambiente real, lo social
+           NOTA: Reemplazar los fondos con fotos reales del casino
+      ────────────────────────────────────────────────────────── -->
+      <section class="section section--gallery" id="galeria" aria-labelledby="gallery-title">
+        <div class="section__inner">
+
+          <header class="section__header">
+            <span class="section__eyebrow">El ambiente</span>
+            <h2 class="section__title" id="gallery-title">ASÍ SE VIVE<br>DREAMS PLAZA</h2>
+          </header>
+
+          <div class="gallery-grid" aria-label="Galería de fotos del casino">
+            <!-- IMPORTANTE: Reemplazar cada .gallery-item con img reales cuando estén disponibles -->
+            <div class="gallery-item gallery-item--1" role="img" aria-label="Ambiente del casino" data-animate></div>
+            <div class="gallery-item gallery-item--2" role="img" aria-label="Mesa de poker"        data-animate></div>
+            <div class="gallery-item gallery-item--3" role="img" aria-label="Gastronomía"          data-animate></div>
+            <div class="gallery-item gallery-item--4" role="img" aria-label="Bar y tragos"         data-animate></div>
+            <div class="gallery-item gallery-item--5" role="img" aria-label="Show en vivo"         data-animate></div>
+            <div class="gallery-item gallery-item--6" role="img" aria-label="Deportes en pantalla" data-animate></div>
+          </div>
+
+          <div class="gallery-instagram" data-animate>
+            <a
+              href="https://instagram.com/dreamsplazamendoza"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="instagram-link"
+              data-event="cta_instagram"
+              aria-label="Ver Dreams Plaza en Instagram"
+            >
+              <span class="instagram-icon" aria-hidden="true">📸</span>
+              <span>@dreamsplazamendoza</span>
+              <span class="instagram-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+        </div>
+      </section><!-- /galeria -->
+
+
+      <!-- ──────────────────────────────────────────────────────
+           SECCIÓN 7 — CTA FINAL
+           Objetivo: cerrar con la invitación experiencial
+      ────────────────────────────────────────────────────────── -->
+      <section class="section section--cta-final" id="reservas" aria-labelledby="cta-final-title">
+        <div class="cta-final__bg" aria-hidden="true"></div>
+        <div class="section__inner cta-final__inner">
+          <div class="cta-final__content" data-animate>
+            <span class="section__eyebrow">Te esperamos esta noche</span>
+            <h2 class="cta-final__title" id="cta-final-title">¿CUÁNDO<br>NOS VES?</h2>
+            <p class="cta-final__sub">
+              Reservá tu lugar, consultá por eventos o simplemente pasate.<br aria-hidden="true" />
+              Dreams Plaza está abierto para que disfrutes.
+            </p>
+            <div class="cta-final__buttons">
+              <a
+                href="https://wa.me/5402610000000?text=Hola%2C+quiero+saber+más+sobre+Dreams+Plaza"
+                class="btn btn--primary btn--cta-xl"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-event="cta_whatsapp_final"
+                aria-label="Contactar Dreams Plaza por WhatsApp"
+              >
+                <span class="btn__icon" aria-hidden="true">💬</span>
+                <span>Hablar por WhatsApp</span>
+              </a>
+            </div>
+            <div class="cta-final__info">
+              <div class="info-item">
+                <span class="info-icon" aria-hidden="true">📍</span>
+                <span>25 de Mayo 1115, Mendoza</span>
+              </div>
+              <div class="info-item">
+                <span class="info-icon" aria-hidden="true">🕗</span>
+                <span>Abierto todos los días · Desde las 20hs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section><!-- /cta-final -->
 
     </main><!-- /main-content -->
 
 
     <!-- ═══════════════════════════════════════════════════════════
          PRE-FOOTER — Leyendas legales IPJyC (obligatorio)
-         Contenido estático en español por requerimiento regulatorio
     ═══════════════════════════════════════════════════════════════ -->
     <aside class="prefooter" role="complementary" aria-label="Juego responsable e información legal">
 
-      <!-- Fila de badges regulatorios -->
       <div class="prefooter__badges">
 
-        <!-- Juego Responsable -->
         <div class="legal-badge legal-badge--responsible">
           <div class="legal-badge__icon" aria-hidden="true">🤝</div>
           <div class="legal-badge__body">
             <strong class="legal-badge__title">JUEGO RESPONSABLE</strong>
             <span class="legal-badge__sub">Programa de Prevención y Asistencia</span>
             <span class="legal-badge__phones">
-              <span aria-label="Teléfono">📞</span>
+              <span aria-label="Teléfono" aria-hidden="true">📞</span>
               <a href="tel:2614247536" class="legal-phone">261-424-7536</a>
               ·
               <a href="tel:2614722471" class="legal-phone">261-472-2471</a>
@@ -328,19 +550,16 @@
           </div>
         </div>
 
-        <!-- +18 -->
         <div class="legal-badge legal-badge--age" aria-label="Solo mayores de 18 años">
           <span class="age-circle" aria-hidden="true">+18</span>
         </div>
 
-        <!-- Pre-autoexclusión -->
         <div class="legal-badge legal-badge--exclusion">
           <span class="exclusion-icon" aria-hidden="true">🚫</span>
-          <span class="exclusion-label">Pre<br/>autoexclusión</span>
+          <span class="exclusion-label">Pre<br>autoexclusión</span>
         </div>
 
-        <!-- IPJyC -->
-        <div class="legal-badge legal-badge--ipjyc" aria-label="Instituto Provincial de Juegos y Casinos, Mendoza Gobierno">
+        <div class="legal-badge legal-badge--ipjyc" aria-label="IPJyC Mendoza Gobierno">
           <span class="ipjyc-gov" aria-hidden="true">🏛️</span>
           <div class="ipjyc-text">
             <strong>MENDOZA</strong>
@@ -349,9 +568,8 @@
           </div>
         </div>
 
-      </div><!-- /prefooter__badges -->
+      </div>
 
-      <!-- Leyendas de advertencia -->
       <div class="prefooter__warnings" role="note">
         <p class="prefooter__warn">
           <span aria-hidden="true">🔞</span>
@@ -363,37 +581,82 @@
         </p>
       </div>
 
-    </aside><!-- /prefooter -->
+    </aside>
 
 
     <!-- ═══════════════════════════════════════════════════════════
          FOOTER
     ═══════════════════════════════════════════════════════════════ -->
     <footer class="site-footer" role="contentinfo">
-      <p class="footer__legal" data-i18n="footer.legal">
-        Casino del Hyatt Mendoza · Jogo responsável · +18
-      </p>
-      <p class="footer__address" data-i18n="footer.address">
-        25 de mayo 1115, Mendoza, Argentina
-      </p>
+      <div class="footer__inner">
+
+        <div class="footer__brand">
+          <span class="footer__brand-name">DREAMS PLAZA</span>
+          <span class="footer__brand-sub">Casino &amp; Entertainment · Mendoza</span>
+        </div>
+
+        <nav class="footer__links" aria-label="Links del sitio">
+          <a href="#experiencias">Experiencias</a>
+          <a href="#eventos">Eventos</a>
+          <a href="#poker">Poker</a>
+          <a href="#gastronomia">Gastronomía</a>
+          <a href="#galeria">Galería</a>
+        </nav>
+
+        <div class="footer__social">
+          <a
+            href="https://instagram.com/dreamsplazamendoza"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-event="cta_footer_instagram"
+            aria-label="Dreams Plaza en Instagram"
+          >📸 Instagram</a>
+          <a
+            href="https://wa.me/5402610000000"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-event="cta_footer_whatsapp"
+            aria-label="Dreams Plaza en WhatsApp"
+          >💬 WhatsApp</a>
+        </div>
+
+      </div>
+
+      <div class="footer__legal">
+        <p>Dreams Plaza Casino · Juego Responsable · +18</p>
+        <p>25 de Mayo 1115, Mendoza, Argentina</p>
+      </div>
     </footer>
 
 
-    <!-- Fallback para JS deshabilitado -->
+    <!-- ═══ BOTÓN WHATSAPP FLOTANTE ══════════════════════════════ -->
+    <div class="wapp-float" id="wappFloat" aria-live="polite">
+      <a
+        href="https://wa.me/5402610000000?text=Hola%2C+quiero+saber+más+sobre+Dreams+Plaza"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="wapp-float__btn"
+        data-event="cta_wapp_floating"
+        aria-label="Contactar Dreams Plaza por WhatsApp"
+      >
+        <span aria-hidden="true">💬</span>
+        <span class="wapp-float__label">WhatsApp</span>
+      </a>
+    </div>
+
+
     <noscript>
       <style>.no-js-hide { display: none; }</style>
       <div class="noscript-banner" role="alert">
         <p>
-          Seu navegador tem JavaScript desativado.<br />
+          Para la mejor experiencia activá JavaScript en tu navegador.<br />
           <a href="https://wa.me/5402610000000" rel="noopener noreferrer">
-            💬 Clique aqui para falar pelo WhatsApp
+            💬 Contactanos por WhatsApp
           </a>
         </p>
       </div>
     </noscript>
 
-
-    <!-- Script principal — defer evita bloquear el render -->
     <script src="js/main.js" defer></script>
 
   </body>

@@ -1,24 +1,13 @@
 /**
- * CASINO DEL HYATT MENDOZA — main.js
+ * DREAMS PLAZA CASINO — main.js
  * ─────────────────────────────────────────────────────────────
  * Módulos:
- *   1. TRANSLATIONS  — Diccionario centralizado PT / EN / ES
- *   2. i18n          — Detección automática + aplicación al DOM
- *   3. langSwitcher  — Selector manual de idioma
- *   4. leadForm      — Captura de leads + feedback
- *   5. animations    — Fade-in por scroll
- *   6. analytics     — Tracking de CTAs
- *   7. BOOTSTRAP     — Inicialización principal
- *
- * data-attributes reconocidos en HTML:
- *   data-i18n="key"                  → textContent
- *   data-i18n-html="key"             → innerHTML
- *   data-i18n-placeholder="key"      → attr placeholder
- *   data-i18n-href="key"             → attr href
- *   data-i18n-aria-label="key"       → attr aria-label
- *   data-i18n-attr="attrName:key"    → atributo genérico
- *   data-i18n-title="key"            → document.title
- *   data-i18n-meta-description="key" → <meta name="description"> content
+ *   1. NAV        — Sticky con backdrop blur en scroll
+ *   2. SCROLL     — Smooth scroll para links de ancla
+ *   3. ANIMATIONS — Fade-in por IntersectionObserver
+ *   4. WAPP FLOAT — Botón flotante de WhatsApp
+ *   5. ANALYTICS  — Tracking de CTAs (GA4 + Meta Pixel listo)
+ *   6. BOOTSTRAP  — Inicialización principal
  */
 
 'use strict';
@@ -32,390 +21,29 @@ const IS_DEV = (
   window.location.hostname.endsWith('.local')
 );
 
-function devLog(...args) {
-  if (IS_DEV) console.log(...args);
-}
-
-
-/* ─────────────────────────────────────────────────────────────
-   STORAGE — wrapper seguro para localStorage
-   (falla silenciosamente en modo privado / cookies bloqueadas)
-   ───────────────────────────────────────────────────────────── */
-const storage = {
-  get(key) {
-    try { return localStorage.getItem(key); }
-    catch { return null; }
-  },
-  set(key, value) {
-    try { localStorage.setItem(key, value); }
-    catch { /* ignorado */ }
-  },
-};
+const devLog = (...args) => { if (IS_DEV) console.log('[DP]', ...args); };
 
 
 /* ═════════════════════════════════════════════════════════════
-   1. TRANSLATIONS — Diccionario centralizado
+   1. NAV — Sticky con backdrop blur al salir del hero
    ─────────────────────────────────────────────────────────────
-   Estructura de keys:
-     page.*         → metadatos del documento
-     brand.*        → marca
-     hero.*         → sección hero
-     how.*          → sección "cómo funciona"
-     convert.*      → sección de conversión
-     form.*         → formulario de captura
-     footer.*       → pie de página
+   Agrega la clase .nav--scrolled cuando el hero deja de estar
+   visible. El CSS hace el resto (blur + fondo oscuro).
 */
-const TRANSLATIONS = {
-
-  /* ─── PORTUGUÉS (default) ─── */
-  pt: {
-    'page.title':             'Casino del Hyatt Mendoza — Ganhe crédito grátis!',
-    'page.description':       'Jogue no Casino del Hyatt Mendoza. Carregue crédito com QR, Pix ou carteira digital. A 1 minuto de você.',
-
-    'brand.name':             'Casino del Hyatt Mendoza',
-
-    'hero.badge':             '🎰 FREE PLAY GRÁTIS',
-
-    'hero.eyebrow':           'A 1 minuto de você',
-    'hero.headline':          'Jogue no Casino del Hyatt Mendoza',
-    'hero.subheadline':       'Nas nossas máquinas, carregue crédito com QR, Pix ou carteira digital',
-    'hero.cta':               'GANHAR CRÉDITO',
-    'hero.cta.ariaLabel':     'Ganhar crédito grátis pelo WhatsApp',
-    'hero.trust':             '✓ QR Code · ✓ Pix · ✓ Carteira digital',
-    'hero.whatsappUrl':       'https://wa.me/5402610000000?text=Quero+meu+crédito+grátis',
-
-    'how.title':              'Como funciona?',
-    'how.step1.heading':      'Entre no casino',
-    'how.step1.body':         'A 1 minuto a pé. Nossa equipe te recebe na entrada.',
-    'how.step2.heading':      'Carregue crédito na máquina',
-    'how.step2.body':         'Use QR Code, Pix ou carteira digital direto na tela da máquina. Sem dinheiro em espécie.',
-    'how.step3.heading':      'Jogue e divirta-se',
-    'how.step3.body':         'Slots, roleta e muito mais. Mendoza te espera!',
-
-    'convert.title':          'Pronto para jogar?',
-    'convert.body':           'Fale conosco agora pelo WhatsApp e reserve seu crédito grátis.',
-    'convert.cta':            'Falar no WhatsApp',
-    'convert.cta.ariaLabel':  'Abrir WhatsApp para falar conosco',
-    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=Quero+meu+crédito+grátis',
-    'convert.divider':        'ou deixe seu contato',
-
-    'form.name.label':        'Nome',
-    'form.name.placeholder':  'Seu nome',
-    'form.phone.label':       'WhatsApp',
-    'form.phone.placeholder': '+55 11 9 0000-0000',
-    'form.submit':            'Quero meu crédito',
-    'form.success':           '✓ Recebemos seu contato! Falaremos em instantes.',
-
-    'footer.legal':           'Casino del Hyatt Mendoza · Jogo responsável · +18',
-    'footer.address':         '25 de mayo 1115, Mendoza, Argentina',
-  },
-
-  /* ─── INGLÉS ─── */
-  en: {
-    'page.title':             'Casino del Hyatt Mendoza — Get your free credits!',
-    'page.description':       'Play at Casino del Hyatt Mendoza. Load credits with QR, Pix or digital wallet. 1 minute from you.',
-
-    'brand.name':             'Casino del Hyatt Mendoza',
-
-    'hero.badge':             '🎰 FREE PLAY NOW',
-
-    'hero.eyebrow':           '1 minute from you',
-    'hero.headline':          'Play at Casino del Hyatt Mendoza',
-    'hero.subheadline':       'At our machines, load credits with QR, Pix or digital wallet',
-    'hero.cta':               'CLAIM YOUR CREDIT',
-    'hero.cta.ariaLabel':     'Claim your free credit via WhatsApp',
-    'hero.trust':             '✓ QR Code · ✓ Pix · ✓ Digital wallet',
-    'hero.whatsappUrl':       'https://wa.me/5402610000000?text=I+want+my+free+credits',
-
-    'how.title':              'How does it work?',
-    'how.step1.heading':      'Come in',
-    'how.step1.body':         '1 minute on foot. Our team welcomes you at the entrance.',
-    'how.step2.heading':      'Load credits at the machine',
-    'how.step2.body':         'Use QR Code, Pix or digital wallet right on the machine screen. No cash needed.',
-    'how.step3.heading':      'Play and have fun',
-    'how.step3.body':         'Slots, roulette and much more. Mendoza awaits you!',
-
-    'convert.title':          'Ready to play?',
-    'convert.body':           'Chat with us now on WhatsApp and claim your free credit.',
-    'convert.cta':            'Claim on WhatsApp',
-    'convert.cta.ariaLabel':  'Claim your free credit via WhatsApp',
-    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=I+want+to+claim+my+free+credits',
-    'convert.divider':        'or leave your contact',
-
-    'form.name.label':        'Name',
-    'form.name.placeholder':  'Your name',
-    'form.phone.label':       'WhatsApp',
-    'form.phone.placeholder': '+1 555 000-0000',
-    'form.submit':            'Claim your credit',
-    'form.success':           "✓ We got your info! We'll be in touch shortly.",
-
-    'footer.legal':           'Casino del Hyatt Mendoza · Responsible gambling · +18',
-    'footer.address':         '25 de mayo 1115, Mendoza, Argentina',
-  },
-
-  /* ─── ESPAÑOL ─── */
-  es: {
-    'page.title':             'Casino del Hyatt Mendoza — ¡Obtené tu crédito gratis!',
-    'page.description':       'Viví el Casino del Hyatt Mendoza. Cargá crédito con QR, Pix o billetera virtual. A 1 minuto de donde estás.',
-
-    'brand.name':             'Casino del Hyatt Mendoza',
-
-    'hero.badge':             '🎰 FREE PLAY GRATIS',
-
-    'hero.eyebrow':           'A 1 minuto de donde estás',
-    'hero.headline':          'Viví el Casino del Hyatt Mendoza',
-    'hero.subheadline':       'En nuestras máquinas, cargá crédito con QR, Pix o billetera virtual',
-    'hero.cta':               'RECLAMÁ TUS CRÉDITOS',
-    'hero.cta.ariaLabel':     'Reclamá tus créditos gratis por WhatsApp',
-    'hero.trust':             '✓ QR Code · ✓ Pix · ✓ Billetera virtual',
-    'hero.whatsappUrl':       'https://wa.me/5402610000000?text=Quiero+reclamar+mis+créditos+gratis',
-
-    'how.title':              '¿Cómo funciona?',
-    'how.step1.heading':      'Entrá al casino',
-    'how.step1.body':         'A 1 minuto caminando. Nuestro equipo te recibe en la entrada.',
-    'how.step2.heading':      'Cargá crédito en la máquina',
-    'how.step2.body':         'Usá QR Code, Pix o billetera virtual directo en la pantalla de la máquina. Sin efectivo.',
-    'how.step3.heading':      'Jugá y divertite',
-    'how.step3.body':         'Slots, ruleta y mucho más. ¡Mendoza te espera!',
-
-    'convert.title':          '¿Listo para jugar?',
-    'convert.body':           'Hablanos ahora por WhatsApp y reservá tu crédito gratis.',
-    'convert.cta':            'Reclamá por WhatsApp',
-    'convert.cta.ariaLabel':  'Reclamá tus créditos por WhatsApp',
-    'convert.whatsappUrl':    'https://wa.me/5402610000000?text=Quiero+reclamar+mis+créditos+gratis',
-    'convert.divider':        'o dejá tu contacto',
-
-    'form.name.label':        'Nombre',
-    'form.name.placeholder':  'Tu nombre',
-    'form.phone.label':       'WhatsApp',
-    'form.phone.placeholder': '+54 9 261 000-0000',
-    'form.submit':            'Reclamá tus créditos',
-    'form.success':           '✓ ¡Recibimos tu contacto! Te escribimos en instantes.',
-
-    'footer.legal':           'Casino del Hyatt Mendoza · Juego responsable · +18',
-    'footer.address':         '25 de mayo 1115, Mendoza, Argentina',
-  },
-};
-
-
-/* ═════════════════════════════════════════════════════════════
-   2. i18n — Detección y aplicación al DOM
-   ───────────────────────────────────────────────────────────── */
-const i18n = (() => {
-
-  const STORAGE_KEY = 'hcm_lang';
-  const SUPPORTED   = ['pt', 'en', 'es'];
-  const DEFAULT     = 'pt';
-
-  const LOCALE_MAP = { pt: 'pt-BR', en: 'en', es: 'es-AR' };
-
-  /* detect()
-   * Prioridad: localStorage → navigator.languages[] → DEFAULT
-   */
-  function detect() {
-    const saved = storage.get(STORAGE_KEY);
-    if (saved && SUPPORTED.includes(saved)) return saved;
-
-    const langs = Array.from(navigator.languages || [navigator.language || '']);
-    for (const lang of langs) {
-      const code = lang.split('-')[0].toLowerCase();
-      if (SUPPORTED.includes(code)) return code;
-    }
-
-    return DEFAULT;
-  }
-
-  /* apply(lang)
-   * Aplica todas las traducciones al DOM en un solo recorrido por tipo.
-   */
-  function apply(lang) {
-    const dict = TRANSLATIONS[lang] ?? TRANSLATIONS[DEFAULT];
-
-    _applyTextContent(dict);
-    _applyInnerHTML(dict);
-    _applyAttribute('placeholder', '[data-i18n-placeholder]', 'i18nPlaceholder', dict);
-    _applyAttribute('href',        '[data-i18n-href]',        'i18nHref',        dict);
-    _applyAttribute('aria-label',  '[data-i18n-aria-label]',  'i18nAriaLabel',   dict);
-    _applyGenericAttr(dict);
-    _applyDocumentTitle(dict);
-    _applyMetaDescription(dict);
-
-    document.documentElement.setAttribute('lang', LOCALE_MAP[lang] ?? lang);
-    storage.set(STORAGE_KEY, lang);
-    document.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
-  }
-
-  /* current() — idioma activo */
-  function current() {
-    const saved = storage.get(STORAGE_KEY);
-    return (saved && SUPPORTED.includes(saved)) ? saved : detect();
-  }
-
-  /* t(key) — traducción en el idioma activo, para uso en JS */
-  function t(key) {
-    const dict = TRANSLATIONS[current()] ?? TRANSLATIONS[DEFAULT];
-    return _get(dict, key) ?? key;
-  }
-
-  /* ── Privadas ─────────────────────────────────────────────── */
-
-  function _applyTextContent(dict) {
-    document.querySelectorAll('[data-i18n]').forEach((el) => {
-      const val = _get(dict, el.dataset.i18n);
-      if (val !== null) el.textContent = val;
-    });
-  }
-
-  function _applyInnerHTML(dict) {
-    document.querySelectorAll('[data-i18n-html]').forEach((el) => {
-      const val = _get(dict, el.dataset.i18nHtml);
-      if (val !== null) el.innerHTML = val;
-    });
-  }
-
-  function _applyAttribute(attrName, selector, dataKey, dict) {
-    document.querySelectorAll(selector).forEach((el) => {
-      const val = _get(dict, el.dataset[dataKey]);
-      if (val !== null) el.setAttribute(attrName, val);
-    });
-  }
-
-  function _applyGenericAttr(dict) {
-    document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
-      const raw      = el.dataset.i18nAttr ?? '';
-      const colonIdx = raw.indexOf(':');
-      if (colonIdx === -1) return;
-      const attr = raw.slice(0, colonIdx).trim();
-      const key  = raw.slice(colonIdx + 1).trim();
-      const val  = _get(dict, key);
-      if (val !== null && attr) el.setAttribute(attr, val);
-    });
-  }
-
-  function _applyDocumentTitle(dict) {
-    const el = document.querySelector('[data-i18n-title]');
-    if (!el) return;
-    const val = _get(dict, el.dataset.i18nTitle);
-    if (val !== null) document.title = val;
-  }
-
-  function _applyMetaDescription(dict) {
-    const el = document.querySelector('[data-i18n-meta-description]');
-    if (!el) return;
-    const val = _get(dict, el.dataset.i18nMetaDescription);
-    if (val !== null) el.setAttribute('content', val);
-  }
-
-  function _get(dict, key) {
-    if (!key) return null;
-    if (key in dict) return dict[key];
-    if (IS_DEV) console.warn(`[i18n] Key no encontrada: "${key}"`);
-    return null;
-  }
-
-  return { detect, apply, current, t, SUPPORTED };
-
-})();
-
-
-/* ═════════════════════════════════════════════════════════════
-   3. langSwitcher — Selector manual de idioma
-   ───────────────────────────────────────────────────────────── */
-const langSwitcher = (() => {
+const nav = (() => {
 
   function init() {
-    const buttons = document.querySelectorAll('.lang-btn[data-lang]');
+    const navEl  = document.getElementById('nav');
+    const heroEl = document.getElementById('hero');
+    if (!navEl || !heroEl) return;
 
-    buttons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const lang = btn.dataset.lang;
-        if (!i18n.SUPPORTED.includes(lang)) return;
-        _setActive(buttons, lang);
-        i18n.apply(lang);
-      });
-    });
-  }
+    const observer = new IntersectionObserver(
+      ([entry]) => navEl.classList.toggle('nav--scrolled', !entry.isIntersecting),
+      { threshold: 0.15 }
+    );
 
-  function sync(lang) {
-    _setActive(document.querySelectorAll('.lang-btn[data-lang]'), lang);
-  }
-
-  function _setActive(buttons, activeLang) {
-    buttons.forEach((btn) => {
-      const active = btn.dataset.lang === activeLang;
-      btn.classList.toggle('lang-btn--active', active);
-      btn.setAttribute('aria-pressed', String(active));
-    });
-  }
-
-  return { init, sync };
-
-})();
-
-
-/* ═════════════════════════════════════════════════════════════
-   4. leadForm — Captura de leads
-   ───────────────────────────────────────────────────────────── */
-const leadForm = (() => {
-
-  function init() {
-    const form    = document.getElementById('leadForm');
-    const success = document.getElementById('formSuccess');
-    const submit  = form?.querySelector('[type="submit"]');
-    if (!form) return;
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      /* Estado de carga */
-      _setLoading(submit, true);
-
-      const payload = {
-        name:      form.elements['name'].value.trim(),
-        whatsapp:  form.elements['whatsapp'].value.trim(),
-        lang:      i18n.current(),
-        timestamp: new Date().toISOString(),
-        source:    'qr_street',
-      };
-
-      /* ── TODO: conectar a webhook ────────────────────────────
-         Descomentar y reemplazar la URL cuando esté disponible:
-
-         try {
-           await fetch('https://hooks.zapier.com/hooks/catch/XXXXX', {
-             method: 'POST',
-             headers: { 'Content-Type': 'application/json' },
-             body: JSON.stringify(payload),
-           });
-         } catch (err) {
-           if (IS_DEV) console.error('[leadForm] Error al enviar:', err);
-         }
-      ────────────────────────────────────────────────────────── */
-      devLog('[leadForm] Lead:', payload);
-
-      /* Feedback visual */
-      form.reset();
-      _setLoading(submit, false);
-
-      if (success) {
-        success.textContent = i18n.t('form.success');
-        success.hidden = false;
-        success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-
-      analytics.track('form_submit', { lang: payload.lang });
-    });
-  }
-
-  function _setLoading(btn, isLoading) {
-    if (!btn) return;
-    btn.classList.toggle('btn--loading', isLoading);
-    btn.disabled = isLoading;
+    observer.observe(heroEl);
+    devLog('Nav observer listo');
   }
 
   return { init };
@@ -424,30 +52,99 @@ const leadForm = (() => {
 
 
 /* ═════════════════════════════════════════════════════════════
-   5. animations — Fade-in por scroll
-   ───────────────────────────────────────────────────────────── */
-const animations = (() => {
+   2. SCROLL SUAVE — Para todos los links de ancla internos
+   ─────────────────────────────────────────────────────────────
+   Respeta la variable scroll-padding-top del CSS (espacio para nav).
+*/
+const smoothScroll = (() => {
 
   function init() {
-    /* Saltar si el usuario prefiere movimiento reducido */
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (!('IntersectionObserver' in window)) return;
+    document.querySelectorAll('a[href^="#"]').forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const id     = link.getAttribute('href');
+        const target = document.querySelector(id);
+        if (!target) return;
+
+        e.preventDefault();
+
+        /* Usa scrollIntoView con behavior smooth — el scroll-padding-top
+           del CSS maneja el espacio del nav automáticamente */
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        /* Actualiza la URL sin saltar */
+        history.pushState(null, '', id);
+      });
+    });
+
+    devLog('Smooth scroll listo');
+  }
+
+  return { init };
+
+})();
+
+
+/* ═════════════════════════════════════════════════════════════
+   3. ANIMATIONS — Fade-in escalonado por IntersectionObserver
+   ─────────────────────────────────────────────────────────────
+   Observa todos los elementos con:
+     - [data-animate]         → fade-up genérico
+     - .event-card            → tarjetas de eventos
+     - .gastro-card           → tarjetas de gastronomía
+     - .poker__content        → bloque de poker
+     - .gallery-instagram     → link de instagram
+     - .gastro-cta            → CTA de gastronomía
+     - .cta-final__content    → bloque CTA final
+
+   Agrega .is-visible cuando entran en viewport.
+   El CSS maneja la transición.
+*/
+const animations = (() => {
+
+  const SELECTORS = [
+    '[data-animate]',
+    '.event-card',
+    '.gastro-card',
+    '.poker__content',
+    '.gallery-instagram',
+    '.gastro-cta',
+    '.cta-final__content',
+  ].join(', ');
+
+  function init() {
+    /* Saltar animaciones si el usuario lo prefiere */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelectorAll(SELECTORS).forEach((el) => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
+
+    if (!('IntersectionObserver' in window)) {
+      /* Fallback: mostrar todo sin animación */
+      document.querySelectorAll(SELECTORS).forEach((el) => {
+        el.classList.add('is-visible');
+      });
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
+            entry.target.classList.add('is-visible');
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12 }
+      {
+        threshold:   0.1,
+        rootMargin: '0px 0px -40px 0px',
+      }
     );
 
-    document.querySelectorAll('.step, .section--convert').forEach((el) => {
-      observer.observe(el);
-    });
+    document.querySelectorAll(SELECTORS).forEach((el) => observer.observe(el));
+    devLog('Animations observer listo');
   }
 
   return { init };
@@ -456,30 +153,79 @@ const animations = (() => {
 
 
 /* ═════════════════════════════════════════════════════════════
-   6. analytics — Tracking de CTAs
-   ───────────────────────────────────────────────────────────── */
+   4. WHATSAPP FLOTANTE — Aparece al bajar 300px
+   ─────────────────────────────────────────────────────────────
+   El botón se revela suavemente después de que el usuario
+   hace scroll y ya no ve el CTA del hero.
+*/
+const wappFloat = (() => {
+
+  const THRESHOLD = 300; // px desde top
+
+  function init() {
+    const el = document.getElementById('wappFloat');
+    if (!el) return;
+
+    let visible = false;
+
+    const onScroll = () => {
+      const shouldShow = window.scrollY > THRESHOLD;
+      if (shouldShow === visible) return;
+      visible = shouldShow;
+      el.classList.toggle('wapp-float--visible', visible);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); /* chequear estado inicial */
+
+    devLog('WhatsApp float listo');
+  }
+
+  return { init };
+
+})();
+
+
+/* ═════════════════════════════════════════════════════════════
+   5. ANALYTICS — Tracking de CTAs
+   ─────────────────────────────────────────────────────────────
+   Para activar Google Analytics 4:
+     1. Agregar en <head>:
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-XXXXXXXXXX');
+        </script>
+     2. Descomentar la línea gtag() más abajo.
+
+   Para activar Meta Pixel (Instagram/Facebook retargeting):
+     1. Agregar el snippet oficial de Meta Pixel en <head>.
+     2. Descomentar la línea fbq() más abajo.
+*/
 const analytics = (() => {
 
-  /* track(eventName, payload)
-   *
-   * Para activar Google Analytics 4:
-   *   Agregar en <head>: <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"></script>
-   *   Descomentar la línea gtag() de abajo.
-   *
-   * Para activar Meta Pixel:
-   *   Agregar el snippet de Meta Pixel en <head>.
-   *   Descomentar la línea fbq() de abajo.
-   */
   function track(eventName, payload = {}) {
     devLog(`[analytics] ${eventName}`, payload);
-    // if (typeof gtag === 'function') gtag('event', eventName, payload);
-    // if (typeof fbq === 'function')  fbq('trackCustom', eventName, payload);
+
+    // ── Google Analytics 4 ──────────────────────────────────
+    // if (typeof gtag === 'function') {
+    //   gtag('event', eventName, payload);
+    // }
+
+    // ── Meta Pixel ──────────────────────────────────────────
+    // if (typeof fbq === 'function') {
+    //   fbq('trackCustom', eventName, payload);
+    // }
   }
 
   function initCTATracking() {
     document.querySelectorAll('[data-event]').forEach((el) => {
       el.addEventListener('click', () => {
-        track(el.dataset.event, { lang: i18n.current() });
+        track(el.dataset.event, {
+          section: el.closest('section, header')?.id ?? 'unknown',
+        });
       });
     });
   }
@@ -490,18 +236,16 @@ const analytics = (() => {
 
 
 /* ═════════════════════════════════════════════════════════════
-   7. BOOTSTRAP
-   ───────────────────────────────────────────────────────────── */
+   6. BOOTSTRAP — Inicialización principal
+*/
 document.addEventListener('DOMContentLoaded', () => {
 
-  const lang = i18n.detect();
-  i18n.apply(lang);
-  langSwitcher.sync(lang);
-  langSwitcher.init();
-  leadForm.init();
+  nav.init();
+  smoothScroll.init();
   animations.init();
+  wappFloat.init();
   analytics.initCTATracking();
 
-  devLog(`[app] Iniciado en idioma: ${lang}`);
+  devLog('Dreams Plaza Casino — iniciado correctamente ✓');
 
 });
